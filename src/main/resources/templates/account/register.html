@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create user</title>
+</head>
+<body>
+<h1>Create user</h1>
+<p>
+    <a href="/user/list-food">Customer list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+
+<form th:action="@{/register}" th:object="${appUser}" method="post">
+    <table>
+        <tr>
+            <td>name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+
+        <tr>
+            <td>username:</td>
+            <td><input type="text" th:field="*{username}"/></td>
+        </tr>
+
+        <tr>
+            <td>password:</td>
+            <td><input type="password" th:field="*{password}"/></td>
+        </tr>
+        <tr>
+            <td>Role:</td>
+            <td>
+                <select th:field="*{userRole}">
+                        <option th:each="r : ${roleList}" th:value="${r.id}" th:text="${r.role}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Register"></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

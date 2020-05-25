@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Oder List</title>
+</head>
+<body>
+<h1>fjasfnkjas</h1>
+<!--<a href="/admin/create-category">Create new category</a>-->
+<!--<h1>Customers</h1>-->
+<!--<form action="/search" method="post">-->
+<!--    search by:-->
+<!--    <input type="text" name="s">-->
+<!--    Language: <a href="?lang=en">English</a> | <a href="?lang=vi">Viet Nam</a>-->
+<!--    <label>-->
+<!--        <select name="searchType">-->
+<!--            <option th:value ="firstName" th:text="#{first.name}"></option>-->
+<!--            <option th:value = "lastName" th:text="#{last.name}"></option>-->
+<!--        </select>-->
+<!--    </label>-->
+<!--    <input type="submit" value="Search">-->
+<!--</form>-->
+<!--<form action="/oder" method="post">-->
+<!--    <table border="1">-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Book Name</th>-->
+<!--        </tr>-->
+<!--        <th:block th:each="oder, iter : ${oders}">-->
+<!--            <tr>-->
+<!--                <td th:text="${customer.firstName}"></td>-->
+<!--                <td th:text="${customer.lastName}"></td>-->
+<!--                <td th:text="${customer.province.name}"></td>-->
+<!--                <td th:text="${customer.phoneNumber}"></td>-->
+<!--                <td th:text="${customer.email}"></td>-->
+<!--                <td><a th:href="@{/edit-customer/__${customer.id}__ }">Edit</a></td>-->
+<!--                <td><a th:href="@{/delete-customer/__${customer.id}__ }">Delete</a></td>-->
+<!--                <td><input type="checkbox" name="starredCustomer" th:value="${customer.id}" th:checked="${isStarred[iter.index]}"></td>-->
+<!--            </tr>-->
+<!--        </th:block>-->
+<!--    </table>-->
+<!--    <button>Save</button>-->
+<!--</form>-->
+<!--<div th:if="${message}">-->
+<!--    <h2 th:text="${message}"></h2>-->
+<!--</div>-->
+<!--<form action="/upload" method="post" enctype="multipart/form-data">-->
+<!--    Image:-->
+<!--    <input type="file" name="image">-->
+<!--    <input type="submit" value="Upload">-->
+<!--</form>-->
+<!--<div>-->
+<!--    <a th:href="@{'/customer'(page=${customers.number - 1})}" th:if="${customers.hasPrevious()}">Previous</a>-->
+<!--    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>-->
+<!--    <a th:href="@{'/customer'(page=${customers.number + 1})}" th:if="${customers.hasNext()}">Next</a>-->
+<!--</div>-->
+</body>
+</html>
