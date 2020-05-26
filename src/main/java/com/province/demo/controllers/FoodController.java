@@ -32,7 +32,7 @@ public class FoodController {
     public List<Category> categories() {
         return categoryService.findAll();}
 
-    @GetMapping("/food-form")
+    @GetMapping("/admin/food-form")
     public ModelAndView showFormCreateFood(){
         ModelAndView modelAndView = new ModelAndView("food/addnew");
         modelAndView.addObject("foods", new Food());
@@ -43,7 +43,7 @@ public class FoodController {
     public String createNewFood(@ModelAttribute Food food, RedirectAttributes redirectAttributes){
         foodService1.save(food);
         redirectAttributes.addFlashAttribute("message", "create successfully");
-        return "redirect:/food-form";
+        return "redirect:/admin/food-form";
     }
 
     @GetMapping("/index")
