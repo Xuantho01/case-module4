@@ -15,6 +15,16 @@ public class Food {
 
     private float discount;
 
+    private String images;
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
+
     public float getPrice() {
         return price;
     }

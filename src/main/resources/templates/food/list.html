@@ -34,7 +34,7 @@
                 <td th:text="${food.title}"></td>
                 <td th:text="${food.price}"></td>
                 <td th:text="${food.discount}"></td>
-                <td><a th:href="@{/edit-food/__${food.id}__ }">Edit</a></td>
+                <td><a th:href="@{/edit-food-form/__${food.id}__ }">Edit</a></td>
                 <td><a th:href="@{/delete-food/__${food.id}__ }">Delete</a></td>
 <!--                <td><input type="checkbox" name="starredCustomer" th:value="${food.id}" th:checked="${isStarred[iter.index]}"></td>-->
             </tr>
