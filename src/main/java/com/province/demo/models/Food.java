@@ -59,7 +59,6 @@ public class Food {
     public void setTitle(String title) {
         this.title = title;
     }
-
     public Category getCategory() {
         return category;
     }

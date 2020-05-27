@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -42,7 +41,7 @@ public class UserController {
         return "redirect:/register-form";
     }
 
-    @GetMapping("/user")
+    @GetMapping("/admin")
     public String isLogged(){
         return "theme/index";
     }

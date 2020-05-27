@@ -1,5 +1,6 @@
 package com.province.demo.servicies.impl;
 
+import com.province.demo.models.Category;
 import com.province.demo.models.Food;
 import com.province.demo.repositories.FoodRepository;
 import com.province.demo.servicies.IFoodService;
@@ -40,5 +41,15 @@ public class FoodServiceImpl implements IFoodService {
     @Override
     public void remove(Long id) {
         foodRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Food> findAllByTitle(String name) {
+        return foodRepository.findAllByTitle(name);
+    }
+
+    @Override
+    public List<Food> findAllByCategory(Category category) {
+        return foodRepository.findAllByCategory(category);
     }
 }

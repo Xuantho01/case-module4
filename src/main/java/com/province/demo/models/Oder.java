@@ -1,6 +1,7 @@
 package com.province.demo.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Oder {
@@ -12,8 +13,16 @@ public class Oder {
     @ManyToOne
     private AppUser appUser;
 
-    @ManyToOne
-    private Food food;
+    @OneToMany
+    private Set<Food> food;
+
+    public Set<Food> getFood() {
+        return food;
+    }
+
+    public void setFood(Set<Food> food) {
+        this.food = food;
+    }
 
     public Long getId() {
         return id;
@@ -31,11 +40,4 @@ public class Oder {
         this.appUser = appUser;
     }
 
-    public Food getFood() {
-        return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
-    }
 }

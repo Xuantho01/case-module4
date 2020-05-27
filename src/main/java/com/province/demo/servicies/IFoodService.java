@@ -1,5 +1,6 @@
 package com.province.demo.servicies;
 
+import com.province.demo.models.Category;
 import com.province.demo.models.Food;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,5 +19,10 @@ public interface IFoodService {
     Food save(Food food);
 
     void remove(Long id);
+
+    List<Food> findAllByTitle(String name);
+
+    List<Food> findAllByCategory(Category id);
+
 
 }

@@ -5,18 +5,17 @@ import com.province.demo.models.Category;
 import com.province.demo.servicies.IFoodService;
 import com.province.demo.servicies.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 public class FoodController {
 
     @Autowired
@@ -39,12 +38,31 @@ public class FoodController {
         return modelAndView;
     }
 
-    @PostMapping("/admin/create-food")
-    public String createNewFood(@ModelAttribute Food food, RedirectAttributes redirectAttributes){
-        foodService1.save(food);
-        redirectAttributes.addFlashAttribute("message", "create successfully");
-        return "redirect:/admin/food-form";
+
+
+//
+//    @GetMapping("/admin/food-form")
+//    public ModelAndView showFormCreateFood(){
+//        ModelAndView modelAndView = new ModelAndView("food/addnew");
+//        modelAndView.addObject("foods", new Food());
+//        return modelAndView;
+//    }
+
+
+    @PostMapping(value = "/create-food",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> createNewFood(@RequestBody Food food){
+        foodService.save(food);
+        ResponseEntity<Void> res = new ResponseEntity<>(HttpStatus.OK);
+        return res;
     }
+
+//    @PostMapping("/admin/create-food")
+//    public String createNewFood(@ModelAttribute Food food, RedirectAttributes redirectAttributes){
+//        foodService1.save(food);
+//        redirectAttributes.addFlashAttribute("message", "create successfully");
+//        return "redirect:/admin/food-form";
+//    }
+
 
     @GetMapping("/index")
     public ModelAndView showHome(){
@@ -54,7 +72,7 @@ public class FoodController {
         return modelAndView;
     }
 
-    @GetMapping("/edit-food-form/{id}")
+    @GetMapping("/admin/edit-food-form/{id}")
     public ModelAndView showEditFormFood(@PathVariable("id") Long id){
 
         Optional<Food> food = foodService.findById(id);
@@ -62,19 +80,19 @@ public class FoodController {
             ModelAndView modelAndView = new ModelAndView("food/edit");
             modelAndView.addObject("foods", food);
             return modelAndView;
-
         }
+
         ModelAndView modelAndView = new ModelAndView("food/edit");
         modelAndView.addObject("message", "try again");
         return modelAndView;
     }
 
 
-    @PostMapping("/edit-food")
+    @PostMapping("/admin/edit-food")
     public String editFood(@ModelAttribute Food food, RedirectAttributes redirectAttributes){
         foodService1.save(food);
         redirectAttributes.addFlashAttribute("message", "create successfully");
-        return "redirect:/food-form";
+        return "redirect:/admin/food-form";
     }
 
     // detail
@@ -93,30 +111,53 @@ public class FoodController {
         return modelAndView;
     }
 
+//    @PostMapping(value = "/search-food", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<List<Food>> search(@RequestBody Food food){
+//        List<Food> list = foodService.findAllByTitle(food.getTitle());
+//        return new ResponseEntity<List<Food>>(list,HttpStatus.OK);
+//    }
 
-    @GetMapping("/blog")
-    public String getBlog(){
-        return "theme/blog";
+    @GetMapping("/search-food")
+    public ModelAndView search(@RequestParam("searchFood") String searchFood) {
+        List<Food> list = foodService.findAllByTitle(searchFood);
+        ModelAndView modelAndView = new ModelAndView("theme/index");
+        modelAndView.addObject("foods", list);
+        return modelAndView;
     }
-    @GetMapping("/blog-detail")
-    public String getBlogDetail(){
-        return "theme/blog-details";
+
+    @GetMapping("/search-category/{id}")
+    public ModelAndView searchByCategory(@PathVariable("id") Category category_id) {
+        List<Food> list = foodService.findAllByCategory(category_id);
+        ModelAndView modelAndView = new ModelAndView("theme/index");
+        modelAndView.addObject("foods", list);
+        return modelAndView;
     }
-    @GetMapping("/checkout")
-    public String getCheckout(){
-        return "theme/checkout";
-    }
-    @GetMapping("/contact")
-    public String getContact(){
-        return "theme/contact";
-    }
-    @GetMapping("/shop-detail")
-    public String getShopDetail(){
-        return "theme/shop-details";
-    }
-    @GetMapping("/shop-grid")
-    public String getShopGrid(){
-        return "theme/shoping-cart";
-    }
+
+
+//
+//    @GetMapping("/blog")
+//    public String getBlog(){
+//        return "theme/blog";
+//    }
+//    @GetMapping("/blog-detail")
+//    public String getBlogDetail(){
+//        return "theme/blog-details";
+//    }
+//    @GetMapping("/checkout")
+//    public String getCheckout(){
+//        return "theme/checkout";
+//    }
+//    @GetMapping("/contact")
+//    public String getContact(){
+//        return "theme/contact";
+//    }
+//    @GetMapping("/shop-detail")
+//    public String getShopDetail(){
+//        return "theme/shop-details";
+//    }
+//    @GetMapping("/shop-grid")
+//    public String getShopGrid(){
+//        return "theme/shoping-cart";
+//    }
 
 }

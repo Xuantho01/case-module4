@@ -25,7 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .antMatchers("articles/**").access("hasAnyRole('ADMIN','USER')")
                 .and().formLogin()
-                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));    }
+                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+                http.csrf().disable();
+    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService((UserDetailsService) iUserService).passwordEncoder(NoOpPasswordEncoder.getInstance());
