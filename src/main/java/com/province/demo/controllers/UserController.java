@@ -1,7 +1,9 @@
 package com.province.demo.controllers;
 
 import com.province.demo.models.AppUser;
+import com.province.demo.models.Category;
 import com.province.demo.models.UserRole;
+import com.province.demo.servicies.ICategoryService;
 import com.province.demo.servicies.IFoodService;
 import com.province.demo.servicies.IUserRoleService;
 import com.province.demo.servicies.IUserService;
@@ -18,6 +20,13 @@ import java.util.List;
 
 @Controller
 public class UserController {
+
+    @ModelAttribute("category")
+    public List<Category> categories() {
+        return categoryService.findAll();}
+
+    @Autowired
+    private ICategoryService categoryService;
 
     @Autowired
     private IUserRoleService userRoleService;
