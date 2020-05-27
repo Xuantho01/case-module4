@@ -2,10 +2,12 @@ package com.province.demo.controllers;
 
 import com.province.demo.models.AppUser;
 import com.province.demo.models.UserRole;
+import com.province.demo.servicies.IFoodService;
 import com.province.demo.servicies.IUserRoleService;
 import com.province.demo.servicies.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,9 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IFoodService foodService;
 
     @GetMapping("/register-form")
     public ModelAndView showRegisterUserForm(){
@@ -42,7 +47,8 @@ public class UserController {
     }
 
     @GetMapping("/admin")
-    public String isLogged(){
+    public String isLogged(Model model){
+        model.addAttribute("foods",foodService.findAll());
         return "theme/index";
     }
 
