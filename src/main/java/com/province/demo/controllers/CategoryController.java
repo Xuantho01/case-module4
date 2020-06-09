@@ -4,12 +4,13 @@ import com.province.demo.models.Category;
 import com.province.demo.servicies.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.List;
+
+@RestController
+@CrossOrigin("http://localhost:4200")
 public class CategoryController {
 
     @Autowired
@@ -22,11 +23,10 @@ public class CategoryController {
 //        return mvn;
 //    }
 
-    @GetMapping("/user/category-form")
-    public ModelAndView showCreate(){
-        ModelAndView modelAndView = new ModelAndView("category/create");
-        modelAndView.addObject("category", new Category());
-       return modelAndView;
+    @GetMapping("/api/category-form")
+    public List<Category> showCreate(){
+        List<Category> categories = iCategoryService.findAll();
+       return categories;
     }
 
     @PostMapping("/user/create-category")

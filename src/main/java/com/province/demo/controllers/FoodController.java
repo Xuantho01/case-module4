@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 public class FoodController {
 
     @Autowired
@@ -27,27 +28,10 @@ public class FoodController {
     @Autowired
     private IFoodService foodService;
 
-    @ModelAttribute("category")
-    public List<Category> categories() {
-        return categoryService.findAll();}
-
-    @GetMapping("/admin/food-form")
-    public ModelAndView showFormCreateFood(){
-        ModelAndView modelAndView = new ModelAndView("food/addnew");
-        modelAndView.addObject("foods", new Food());
-        return modelAndView;
+    @GetMapping("/api/food-list")
+    public List<Food> showFormCreateFood(){
+        return foodService.findAll();
     }
-
-
-
-//
-//    @GetMapping("/admin/food-form")
-//    public ModelAndView showFormCreateFood(){
-//        ModelAndView modelAndView = new ModelAndView("food/addnew");
-//        modelAndView.addObject("foods", new Food());
-//        return modelAndView;
-//    }
-
 
     @PostMapping(value = "/create-food",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createNewFood(@RequestBody Food food){
@@ -55,14 +39,6 @@ public class FoodController {
         ResponseEntity<Void> res = new ResponseEntity<>(HttpStatus.OK);
         return res;
     }
-
-//    @PostMapping("/admin/create-food")
-//    public String createNewFood(@ModelAttribute Food food, RedirectAttributes redirectAttributes){
-//        foodService1.save(food);
-//        redirectAttributes.addFlashAttribute("message", "create successfully");
-//        return "redirect:/admin/food-form";
-//    }
-
 
     @GetMapping("/index")
     public ModelAndView showHome(){
@@ -74,7 +50,6 @@ public class FoodController {
 
     @GetMapping("/admin/edit-food-form/{id}")
     public ModelAndView showEditFormFood(@PathVariable("id") Long id){
-
         Optional<Food> food = foodService.findById(id);
         if(food != null) {
             ModelAndView modelAndView = new ModelAndView("food/edit");
@@ -86,7 +61,6 @@ public class FoodController {
         modelAndView.addObject("message", "try again");
         return modelAndView;
     }
-
 
     @PostMapping("/admin/edit-food")
     public String editFood(@ModelAttribute Food food, RedirectAttributes redirectAttributes){
